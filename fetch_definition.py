@@ -33,7 +33,7 @@ def get_definition(word):
     # extract part of speech and definition
     for data_1 in data[0].get("meanings", []):
         part_of_speech = data_1.get("partOfSpeech")
-        text_format += f"\n<h3>====({part_of_speech.upper()})====</h3>"
+        text_format += f"<h3>====({part_of_speech.upper()})====</h3>"
 
         counts_of_definition = 0
         counts_of_sentences = 0
