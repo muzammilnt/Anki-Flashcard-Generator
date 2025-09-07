@@ -1,5 +1,5 @@
 import tkinter as tk
-from final import AnkiGUI
+from gui import AnkiGUI
 
 
 def main():
