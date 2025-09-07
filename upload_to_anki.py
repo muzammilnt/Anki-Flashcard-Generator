@@ -51,3 +51,12 @@ def is_anki_listening(host="127.0.0.1", port =8765,timeout= 1):
             return True
         except (ConnectionRefusedError,socket.timeout):
             return False
+
+# Create a deck if not existed
+def ensure_deck_exists():
+    payload = {
+        "action": "createDeck",
+        "version": 6,
+        "params": {"deck": "vocabulary-auto"}
+    }
+    requests.post(URL, json=payload)
