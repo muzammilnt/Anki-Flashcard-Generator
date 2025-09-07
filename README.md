@@ -16,7 +16,7 @@ A simple tool for creating vocabulary flashcards in Anki. This project is design
 * Automatically generates flashcards with definitions and example sentences.
 * Supports multiple card types.
 * Works with **Anki** through **AnkiConnect**.
-* Default deck name is **"vocabulary-auto"**.
+* Automatically creates the default deck **"vocabulary-auto"** if it doesn’t already exist.
 * Recommendations for a cleaner look: Align flashcard text to **left** in AnkiDroid.
 * Future plans: AI-powered features for smarter card generation.
 
