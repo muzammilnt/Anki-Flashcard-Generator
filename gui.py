@@ -1,7 +1,7 @@
 
 from tkinter import *
 from fetch_definition import get_definition
-from upload_to_anki import upload_anki, is_anki_listening
+from upload_to_anki import upload_anki, is_anki_listening, ensure_deck_exists
 
 """
 Contains the AnkiGUI class, which builds a Tkinter-based interface for entering words,
@@ -98,6 +98,9 @@ class AnkiGUI:
 
         # Bind Enter key
         self.ent.bind("<Return>", self.submit)
+
+    # create a deck if not existed. Deck name : "vocabulary-auto"
+    ensure_deck_exists()
 
     def show_status(self, duration=3000):
         self.status.config(text="Done!", fg="white", bg="black")
