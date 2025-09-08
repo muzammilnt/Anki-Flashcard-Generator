@@ -40,6 +40,8 @@ A simple tool for creating vocabulary flashcards in Anki. This project is design
 
 ## Installation
 
+It is recommended to use a Python virtual environment to install dependencies safely. You can create and activate one using python3 -m venv venv and source venv/bin/activate (Linux/macOS) or venv\Scripts\activate (Windows), then run pip install -r requirements.txt.
+
 1. Clone this repository:
 
    ```bash
