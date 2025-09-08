@@ -98,9 +98,7 @@ class AnkiGUI:
 
         # Bind Enter key
         self.ent.bind("<Return>", self.submit)
-
-    # create a deck if not existed. Deck name : "vocabulary-auto"
-    ensure_deck_exists()
+        
 
     def show_status(self, duration=3000):
         self.status.config(text="Done!", fg="white", bg="black")
@@ -156,6 +154,9 @@ class AnkiGUI:
             self.error_window("This word might not exist.")
             return
 
+        # create a deck if not existed. Deck name : "vocabulary-auto"
+        ensure_deck_exists()
+        
         #upload based on checkbox
         if checkb == 1:
             upload_anki(word, definition, card_type, mp3)
