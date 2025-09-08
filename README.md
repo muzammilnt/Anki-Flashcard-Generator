@@ -71,11 +71,17 @@ A simple tool for creating vocabulary flashcards in Anki. This project is design
 
 ### GUI Interface
 
-*(Insert Screenshot 1 here)*
+![GUI Screenshot](screenshots/AnkiGpt_GUI.png)
 
-### Example Card in Anki
 
-*(Insert Screenshot 2 here)*
+### *Desktop* example card in Anki with text aligned to the left.
+
+![Desktop example card](screenshots/card_format.png)
+
+
+### *AnkiDroid* example card in Anki with text aligned to the left.
+
+![AnkiDroid example card](screenshots/AnkiDroid_screenshot.png)
 
 ---
 
