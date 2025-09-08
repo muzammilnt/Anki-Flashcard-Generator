@@ -14,6 +14,8 @@ A simple tool for creating vocabulary flashcards in Anki. This project is design
 * Simple Tkinter-based GUI for entering words.
 * Option to include or skip pronunciation.
 * Automatically generates flashcards with definitions and example sentences.
+* Fetches up to 4 definitions per part of speech for each word.
+* Includes 2 example sentences per part of speech for better context
 * Supports multiple card types.
 * Works with **Anki** through **AnkiConnect**.
 * Automatically creates the default deck **"vocabulary-auto"** if it doesn’t already exist.
