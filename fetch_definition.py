@@ -53,10 +53,11 @@ def get_definition(word):
             if counts_of_definition >= MAX_DEFINITIONS:
                 break
 
-    # Append all example sentences
-    text_format += "<h3>====Example:====</h3>"
-    for each in example_sentences:
-        text_format += f"-{each}<br>"
+    # If there is any example sentences append it.
+    if example_sentences:
+        text_format += "<h3>====Example:====</h3>"
+        for each in example_sentences:
+            text_format += f"-{each}<br>"
 
     # censor teh target word for flashcard formatting
     final_format = text_format.replace(f"{word}", "---")
