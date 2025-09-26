@@ -45,7 +45,7 @@ It is recommended to use a Python virtual environment to install dependencies sa
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/your-username/anki-flashcard-generator.git
+   git clone https://github.com/muzammilnt/anki-flashcard-generator.git
    cd anki-flashcard-generator
    ```
 2. Install dependencies:
