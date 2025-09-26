@@ -36,13 +36,9 @@ class AnkiGUI:
         dropbox["menu"].config(bg="#101010", fg="white",
                                activebackground="#212121", activeforeground="white",
                                bd=0, font=("Arial", 15), border=0)
-        # Calculate center x for dropbox
-        dropbox.update_idletasks()
-        drop_width = dropbox.winfo_reqwidth()
-        center_x_dropbox = (window_width // 2) - (drop_width // 2)
-
+    
         # Place the dropbox
-        dropbox.place(x=center_x_dropbox, y=250)
+        dropbox.place(relx=0.5, rely=0.33, anchor='center')
 
 
         # ==== Entry box ====
@@ -51,13 +47,8 @@ class AnkiGUI:
                         borderwidth=0, bd=0, font=("Arial", 25), justify="center")
         self.ent.focus_set()
 
-        # Calculate centered x position
-        self.ent.update_idletasks()
-        entry_width = self.ent.winfo_reqwidth()
-        center_x_entry = (window_width // 2) - (entry_width // 2)
-
         # Place the entry box
-        self.ent.place(x=center_x_entry, y=400)
+        self.ent.place(relx=0.5, rely=0.5, anchor='center')
 
 
         # ==== Checkbox ====
@@ -68,13 +59,8 @@ class AnkiGUI:
                   selectcolor="#212121", bd=0, highlightthickness=0,
                   activebackground="#101010", activeforeground="white", font=("Arial", 12))
 
-        # Calculate centered x position
-        cb.update_idletasks()  # Make sure size is calculated
-        entry_width = cb.winfo_reqwidth()  # Get required width in pixels
-        center_x_cb = (window_width // 2) - (entry_width // 2)
-
         # Place the checkbox
-        cb.place(x=center_x_cb, y=470)  # Adjust y as needed
+        cb.place(relx=0.5, rely=0.6, anchor='center')
 
 
         # ==== Status bar ====
@@ -88,13 +74,8 @@ class AnkiGUI:
                                bd=0, highlightthickness=0)
         submit_button.grid(row=20, column=1, columnspan=2, pady=(15, 70))
 
-        # Calculate centered x position
-        submit_button.update_idletasks()
-        entry_width = submit_button.winfo_reqwidth()
-        center_x_sb = (window_width // 2) - (entry_width // 2)
-
-        # Place the S button
-        submit_button.place(x=center_x_sb, y=550)
+        # Place the submit button
+        submit_button.place(relx=0.5, rely=0.7, anchor='center')
 
         # Bind Enter key
         self.ent.bind("<Return>", self.submit)
@@ -107,32 +88,48 @@ class AnkiGUI:
     def error_window(self, error_msg):
         popup_width = 350
         popup_height = 150
-        popup = Toplevel()
+
+        popup = Toplevel(self.root)
+        popup.transient(self.root)
+        popup.grab_set()
         popup.title("Error")
-        popup.geometry(f"{popup_width}x{popup_height}")
         popup.config(bg="#080808")
 
-        # Get screen size
-        screen_width = popup.winfo_screenwidth()
-        screen_height = popup.winfo_screenheight()
+        # Get root window position and size
+        root_x = self.root.winfo_x()
+        root_y = self.root.winfo_y()
+        root_width = self.root.winfo_width()
+        root_height = self.root.winfo_height()
 
-        # Calculate x and y coordinates to center the popup
-        x = (screen_width // 2) - (popup_width // 2)
-        y = (screen_height // 2) - (popup_height // 2)
-
-        # Set popup size and position
+        # Center popup relative to root window
+        x = root_x + (root_width // 2) - (popup_width // 2)
+        y = root_y + (root_height // 2) - (popup_height // 2)
         popup.geometry(f"{popup_width}x{popup_height}+{x}+{y}")
 
+        def close_popup(event=None):
+                popup.destroy()
+                self.root.unbind("<Return>")
+                self.ent.focus_set()
+
+        # Create content frame
         frame = Frame(popup, bg="#080808", padx=20, pady=20)
-        frame.pack()
+        frame.place(relx=0.5, rely=0.5, anchor="center")
+
+        # Error message
         error_message = Label(frame, text=error_msg,
-                              bg="#080808", fg="white", pady=24, font=("Arial", 12))
+                            bg="#080808", fg="white", pady=24, font=("Arial", 12))
         error_message.pack()
-        ok_button = Button(frame, text="OK", command=popup.destroy,
-                           bg="#101010", fg="white", width=11,
-                           activeforeground="white", activebackground="#212121",
-                           bd=0, highlightthickness=0)
+
+        # OK button
+        ok_button = Button(frame, text="OK", command=close_popup,
+                        bg="#101010", fg="white", width=11,
+                        activeforeground="white", activebackground="#212121",
+                        bd=0, highlightthickness=0)
         ok_button.pack()
+
+        ok_button.focus_set()
+        # Bind Enter key to close the popup
+        ok_button.bind("<Return>", close_popup)
 
     def submit(self, event=None):
         word = self.ent.get()
@@ -141,13 +138,13 @@ class AnkiGUI:
         if not word:
             return
 
-        #store the definition
-        definition, mp3 = get_definition(word)
-
         #check if ankiConnect is on
         if not is_anki_listening():
             self.error_window("Couldn't detect AnkiConnect.")
             return
+        
+        #store the definition
+        definition, mp3 = get_definition(word)
 
         #check if there's no definition
         if definition is None:
@@ -172,3 +169,4 @@ class AnkiGUI:
 
 
 
+ 
