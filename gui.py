@@ -27,7 +27,7 @@ class AnkiGUI:
 
         # ==== Dropdown ====
         self.drop = StringVar()
-        options = ["Basic", "Basic (and reversed card)+"]
+        options = ["Basic", "Basic (and reversed card)"]
         self.drop.set(options[1])
         dropbox = OptionMenu(root, self.drop, *options)
         dropbox.config(bg="#101010", fg="white", width=29,
@@ -144,7 +144,13 @@ class AnkiGUI:
             return
         
         #store the definition
-        definition, mp3 = get_definition(word)
+        result = get_definition(word)
+
+        if isinstance(result, tuple):
+            definition, mp3 = result
+        else:
+            definition, mp3 = result, None
+
 
         #check if there's no definition
         if definition is None:
@@ -155,7 +161,7 @@ class AnkiGUI:
         ensure_deck_exists()
         
         #upload based on checkbox
-        if checkb == 1:
+        if checkb == 1 and mp3:
             upload_anki(word, definition, card_type, mp3)
         else:
             upload_anki(word, definition, card_type)

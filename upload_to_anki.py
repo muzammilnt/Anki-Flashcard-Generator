@@ -11,32 +11,32 @@ def upload_anki(word,definition,card_type,mp3=None):
         Default deck name is : vocabulary-auto
     """
 
+    note = {
+                "deckName": "vocabulary-auto",
+                "modelName": card_type,
+                "fields": {
+                    "Front": word,
+                    "Back": definition
+                },
+                "tags": [
+                    "automate"
+                ]            
+            }
+            
+    if mp3:
+        note["audio"] = [{
+                    "url" : mp3,
+                    "fields" : ["Front"],
+                    "filename": f"{word}.mp3",
+                    "skipHash": "7e2c2f954ef6051373ba916f000168dc"
+
+                }]
+
     payload = {
         "action": "addNotes",
-        "version": 5,
+        "version": 6,
         "params": {
-            "notes": [
-                {
-                    "deckName": "vocabulary-auto",
-                    "modelName": card_type,
-                    "fields": {
-                        "Front": word,
-                        "Back": definition
-                    },
-                    "tags": [
-                        "automate"
-                    ],
-                    "audio": [{
-                        "url" : mp3,
-                        "fields" : ["Front"],
-                        "filename": f"{word}.mp3",
-                        "skipHash": "7e2c2f954ef6051373ba916f000168dc"
-
-                    }]
-
-
-                }
-            ]
+            "notes": [note]
         }
     }
 
