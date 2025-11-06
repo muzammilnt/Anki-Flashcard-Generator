@@ -80,12 +80,12 @@ It is recommended to use a Python virtual environment to install dependencies sa
 
 ### *Desktop* example card in Anki with text aligned to the left.
 
-![Desktop example card](screenshots/card_format.png)
+![Desktop example card](screenshots/new_structure.png)
 
 
 ### *AnkiDroid* example card in Anki with text aligned to the left.
 
-![AnkiDroid example card](screenshots/AnkiDroid_screenshot.png)
+![AnkiDroid example card](screenshots/AnkiDroid_screenshot1.png)
 
 ---
 
