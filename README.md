@@ -91,7 +91,7 @@ It is recommended to use a Python virtual environment to install dependencies sa
 
 ## Notes
 
-* For the best viewing experience in AnkiDroid, set card text alignment to **left**.
+* The quality of the flashcards depends on the [free dictionary API](https://dictionaryapi.dev/) provider.
 * Requires **Anki** to be running in the background with **AnkiConnect** enabled.
 
 ---
