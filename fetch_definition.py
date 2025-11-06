@@ -30,17 +30,18 @@ def get_definition(word):
             audio.append(d.get("audio"))
 
 
-    # extract part of speech and definition
+    # extract and adding part of speech and definition
+    text_format += '<div style="text-align: left;">' # style opening
     for data_1 in data[0].get("meanings", []):
         part_of_speech = data_1.get("partOfSpeech")
-        text_format += f"<h3>====({part_of_speech.upper()})====</h3>"
+        text_format += f"<h3>====({part_of_speech.upper()})====</h3><ul>"
 
         counts_of_definition = 0
         counts_of_sentences = 0
 
         for data_2 in data_1.get("definitions", []):
             definition = data_2.get("definition")
-            text_format += f"-{definition}<br>"
+            text_format += f"<li>{definition}</li>"
             counts_of_definition += 1
 
             #Add example sentences if available, up to the max per POS
@@ -52,12 +53,16 @@ def get_definition(word):
 
             if counts_of_definition >= MAX_DEFINITIONS:
                 break
+        text_format += "</ul>" # close Definition list
 
     # If there is any example sentences append it.
     if example_sentences:
-        text_format += "<h3>====Example:====</h3>"
+        text_format += "<h3>====Example:====</h3><ul>"
         for each in example_sentences:
-            text_format += f"-{each}<br>"
+            text_format += f"<li>{each}</li>"
+    text_format += "</ul>"  # close Example list
+
+    text_format += "</div>" # style closing
 
     # censor teh target word for flashcard formatting
     final_format = text_format.replace(f"{word}", "---")
