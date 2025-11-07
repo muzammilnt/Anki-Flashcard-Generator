@@ -65,8 +65,11 @@ def get_definition(word):
     text_format += "</div>" # style closing
 
     # censor teh target word for flashcard formatting
-    final_format = text_format.replace(f"{word}", "---")
-    return (final_format,audio[0]) if audio else final_format
+    censsor_words = [word,word[:-1]]
+
+    for c in censsor_words:
+        text_format = text_format.replace(c,"---")
+    return (text_format,audio[0]) if audio else text_format
 
 
 
