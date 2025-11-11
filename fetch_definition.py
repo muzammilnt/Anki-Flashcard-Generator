@@ -1,4 +1,5 @@
 import requests
+import re
 
 MAX_DEFINITIONS = 4
 MAX_SENTENCES_PER_POS = 2
@@ -68,7 +69,7 @@ def get_definition(word):
     censsor_words = [word,word[:-1]]
 
     for c in censsor_words:
-        text_format = text_format.replace(c,"---")
+        text_format = re.sub(c, "---", text_format, flags=re.IGNORECASE)
     return (text_format,audio[0]) if audio else text_format
 
 
